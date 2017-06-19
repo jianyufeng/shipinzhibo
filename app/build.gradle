@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion  23
+    buildToolsVersion  "23.0.3"
+    defaultConfig {
+        applicationId "com.sanba.zhibb"
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile files('lib/txrtmpsdk.jar')//直播 SDK java层封装
+    compile files('lib/cos-sdk-android.1.4.3.6.jar')//对象存储 COS 相关的 jar 包
+    compile files('lib/okhttp-3.2.0.jar')//网络请求库
+    compile files('lib/okio-1.6.0.jar')//网络操作 I/O 库
+    compile files('lib/sha1utils.jar')//UGC 计算上传文件的 SHA 值 jar 包
+    compile files('lib/ugcupload.jar')//UGC 上传文件到点播系统 jar 包
+}
