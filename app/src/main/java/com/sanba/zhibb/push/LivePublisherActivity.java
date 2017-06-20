@@ -100,6 +100,7 @@ import java.text.SimpleDateFormat;
  * mLivePusher.stopPusher();            //停止推流
  * mLivePusher.setPushListener(null);   //解绑 listener
  * }
+ *
  */
 public class LivePublisherActivity extends Activity implements View.OnClickListener, ITXLivePushListener, BeautySettingPannel.IOnBeautyParamsChangeListener/*, ImageReader.OnImageAvailableListener*/ {
     private static final String TAG = LivePublisherActivity.class.getSimpleName();
