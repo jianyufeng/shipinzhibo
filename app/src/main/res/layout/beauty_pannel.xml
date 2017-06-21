@@ -59,7 +59,7 @@
             android:maxHeight="4.0dip"
             android:minHeight="4.0dip"
             android:visibility="visible"
-            android:max="7"
+            android:max="9"
             android:progress="5"
             android:indeterminate="false" />
     </LinearLayout>
@@ -88,7 +88,6 @@
             android:maxHeight="4.0dip"
             android:minHeight="4.0dip"
             android:visibility="visible"
-
             android:max="9"
             android:progress="3"
             android:indeterminate="false" />

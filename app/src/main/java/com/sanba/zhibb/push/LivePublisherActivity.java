@@ -120,6 +120,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
     private Button mBtnTouchFocus;
     private Button mBtnHWEncode;
     private Button mBtnOrientation;
+    private Button mBtnStop;                    //停止录制
     public TextView mLogViewStatus;
     public TextView mLogViewEvent;
     protected int mActivityType;
@@ -173,6 +174,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
         mBitmap = decodeResource(getResources(), R.mipmap.ic_launcher);
         // 屏幕监测
         mRotationObserver = new RotationObserver(new Handler());
+
         //注册观察
         mRotationObserver.startObserver();
         //电话管理
@@ -181,13 +183,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
         tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
         //设置布局
         setContentView();
-        LinearLayout backLL = (LinearLayout) findViewById(R.id.back_ll);
-        backLL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         TextView titleTV = (TextView) findViewById(R.id.title_tv);
         titleTV.setText(getIntent().getStringExtra("TITLE"));
         inputUrl = getIntent().getStringExtra("PLAY_URL");
@@ -238,7 +234,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
         //取消观察
         mRotationObserver.stopObserver();
     }
-
+    //drawable -> bitmap
     private Bitmap decodeResource(Resources resources, int id) {
         TypedValue value = new TypedValue();
         resources.openRawResource(id, value);
@@ -514,7 +510,14 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
                 mLivePusher.setConfig(mLivePushConfig);
             }
         });
-
+        //停止按钮
+        mBtnStop = (Button) findViewById(R.id.btnStop);
+        mBtnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {onPause();
+                finish();
+            }
+        });
         View view = findViewById(android.R.id.content);
         view.setOnClickListener(this);
         mLogViewStatus.setText("Log File Path:" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/txRtmpLog");
@@ -622,7 +625,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
         //  设置自定义音视频采集、预处理类型.  音视频采集、预处理类型.请参考自定义音视频采集、预处理类型.
         mLivePushConfig.setCustomModeType(customModeType);
         /*设置推流暂停时,后台播放暂停图片的方式.
-        Parameters:
+        Parameters:3
         time - 后台播放暂停图片的最长持续时间,单位是秒,默认值是300.
          fps - 后台播放暂停图片的帧率,最小值为5,最大值为20,默认是10.*/
         mLivePushConfig.setPauseImg(300, 10);
@@ -635,7 +638,7 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
          beautyLevel - 美颜等级.美颜等级即 beautyLevel 取值为0-9.取值为0时代表关闭美颜效果.默认值:0,即关闭美颜效果.
          whiteningLevel - 美白等级.美白等级即 whiteningLevel 取值为0-3.取值为0时代表关闭美白效果.默认值:0,即关闭美白效果.
          */
-        mLivePushConfig.setBeautyFilter(mBeautyLevel, mWhiteningLevel);
+        mLivePushConfig.setBeautyFilter(mBeautyLevel, mWhiteningLevel); //初始化
         /**
          * 开启就近选路
          只有在推流启动前设置才会生效，推流过程中设置不会生效。
@@ -895,44 +898,44 @@ public class LivePublisherActivity extends Activity implements View.OnClickListe
     @Override
     public void onBeautyParamsChange(BeautySettingPannel.BeautyParams params, int key) {
         switch (key) {
-            case BeautySettingPannel.BEAUTYPARAM_EXPOSURE:
+            case BeautySettingPannel.BEAUTYPARAM_EXPOSURE: //调整曝光
                 if (mLivePusher != null) {
                     mLivePusher.setExposureCompensation(params.mExposure);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_BEAUTY:
+            case BeautySettingPannel.BEAUTYPARAM_BEAUTY:  //设置 美颜
                 mBeautyLevel = params.mBeautyLevel;
                 if (mLivePusher != null) {
                     mLivePusher.setBeautyFilter(mBeautyLevel, mWhiteningLevel);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_WHITE:
+            case BeautySettingPannel.BEAUTYPARAM_WHITE:  //设置 美白
                 mWhiteningLevel = params.mWhiteLevel;
                 if (mLivePusher != null) {
                     mLivePusher.setBeautyFilter(mBeautyLevel, mWhiteningLevel);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_BIG_EYE:
+            case BeautySettingPannel.BEAUTYPARAM_BIG_EYE:  //设置大眼效果
                 if (mLivePusher != null) {
                     mLivePusher.setEyeScaleLevel(params.mBigEyeLevel);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_FACE_LIFT:
+            case BeautySettingPannel.BEAUTYPARAM_FACE_LIFT: //设置瘦脸效果
                 if (mLivePusher != null) {
                     mLivePusher.setFaceSlimLevel(params.mFaceSlimLevel);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_FILTER:
+            case BeautySettingPannel.BEAUTYPARAM_FILTER:  //滤镜效果设置
                 if (mLivePusher != null) {
                     mLivePusher.setFilter(params.mFilterBmp);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_GREEN:
+            case BeautySettingPannel.BEAUTYPARAM_GREEN:  //设置绿幕文件
                 if (mLivePusher != null) {
-                    mLivePusher.setGreenScreenFile(params.mGreenFile);
+                    boolean b = mLivePusher.setGreenScreenFile(params.mGreenFile);
                 }
                 break;
-            case BeautySettingPannel.BEAUTYPARAM_MOTION_TMPL:
+            case BeautySettingPannel.BEAUTYPARAM_MOTION_TMPL: //设置动态贴图
                 if (mLivePusher != null) {
                     mLivePusher.setMotionTmpl(params.mMotionTmplPath);
                 }

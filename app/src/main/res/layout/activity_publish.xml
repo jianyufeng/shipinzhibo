@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/main_bkg"
 >
-
+    <!--录制载体-->
     <com.tencent.rtmp.ui.TXCloudVideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
@@ -13,30 +13,17 @@
         android:layout_gravity="top|right"
         android:layout_marginBottom="0dp"
         android:visibility="gone"/>
-
-
-    <com.tencent.rtmp.ui.TXCloudVideoView
-        android:id="@+id/video_view_play1"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"/>
-
-    <com.tencent.rtmp.ui.TXCloudVideoView
-        android:id="@+id/video_view_play2"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        android:layout_gravity="bottom|left"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"/>
-
+    <!--录制的功能选项-->
     <RelativeLayout
         android:id="@+id/test_releative_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="55dp"
+        android:layout_gravity="bottom">
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:background="#aaffffff"/>
         <LinearLayout
             android:id="@+id/btns_tests"
             android:layout_width="match_parent"
@@ -97,23 +84,23 @@
                 android:id="@+id/btnLog"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:visibility="gone"
-                android:background="@mipmap/log_show"/>
+                android:background="@mipmap/log_show"
+                android:visibility="gone"/>
             <TextView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnBitrate"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@mipmap/fix_bitrate"/>
             <TextView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnFlash"
                 android:layout_width="35dp"
@@ -130,9 +117,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btnStop"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/close_press"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
     </RelativeLayout>
-
+    <!--log 状态-->
     <TextView
         android:id="@+id/logViewStatus"
         android:layout_width="match_parent"
@@ -148,7 +144,7 @@
         android:textStyle="bold"
         android:typeface="monospace"/>
 
-
+    <!--选择不同的码率-->
     <LinearLayout
         android:id="@+id/layoutBitrate"
         android:layout_width="match_parent"
@@ -219,7 +215,7 @@
                 android:textColor="@color/resolution_radio_color"/>
         </RadioGroup>
     </LinearLayout>
-
+    <!--效果-->
     <com.sanba.zhibb.push.widge.BeautySettingPannel
         android:id="@+id/layoutFaceBeauty"
         android:layout_width="match_parent"
@@ -227,7 +223,7 @@
         android:layout_gravity="bottom"
         android:clickable="true"
         android:visibility="gone"/>
-
+    <!--返回键和标日-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -265,8 +261,7 @@
             android:textColor="#ffffff"
             android:textSize="18dp"/>
     </FrameLayout>
-
-
+    <!--网络不稳定提醒-->
     <TextView
         android:id="@+id/netbusy_tv"
         android:layout_width="match_parent"
@@ -279,8 +274,160 @@
         android:textColor="#ffffff"
         android:textSize="10dp"
         android:visibility="gone"/>
-    <TextView android:id="@+id/textView" android:layout_width="wrap_content"
-              android:layout_height="wrap_content" android:text="tion"/>
+    <!--log 状态-->
+    <!--主播信息-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/gray_radius_rectangle"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="5dp">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/circle"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxWidth="50dp"
+                            android:singleLine="true"
+                            android:text="艾尼"
+                            android:textColor="#fff"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/red_radius_rectangle"
+                            android:gravity="center_vertical"
+                            android:paddingBottom="1dp"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:paddingTop="1dp"
+                            android:text="小小星光"
+                            android:textColor="#fff"
+                            android:textSize="10sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="1555w万"
+                            android:textColor="#fff"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="5dp"
+                        android:scrollbars="none"
+                    >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/red_circle"/>
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/red_circle"/>
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/red_circle"/>
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/red_circle"/>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/gray_radius_rectangle"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="15dp"
+                    android:src="#ff0"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="210"
+                    android:textSize="14sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"

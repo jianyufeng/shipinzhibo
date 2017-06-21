@@ -22,14 +22,14 @@ import java.util.ArrayList;
 
 public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBarChangeListener {
 
-    public static final int BEAUTYPARAM_EXPOSURE = 0;
-    public static final int BEAUTYPARAM_BEAUTY = 1;
-    public static final int BEAUTYPARAM_WHITE = 2;
-    public static final int BEAUTYPARAM_FACE_LIFT = 3;
-    public static final int BEAUTYPARAM_BIG_EYE = 4;
-    public static final int BEAUTYPARAM_FILTER = 5;
-    public static final int BEAUTYPARAM_MOTION_TMPL = 6;
-    public static final int BEAUTYPARAM_GREEN = 7;
+    public static final int BEAUTYPARAM_EXPOSURE = 0;  //曝光
+    public static final int BEAUTYPARAM_BEAUTY = 1;  //美颜
+    public static final int BEAUTYPARAM_WHITE = 2; //美白
+    public static final int BEAUTYPARAM_FACE_LIFT = 3;  //设置瘦脸效果
+    public static final int BEAUTYPARAM_BIG_EYE = 4; //大眼效果
+    public static final int BEAUTYPARAM_FILTER = 5;  //滤镜
+    public static final int BEAUTYPARAM_MOTION_TMPL = 6;   //设置动态贴图
+    public static final int BEAUTYPARAM_GREEN = 7;  //设置绿幕文件
 
     static public class BeautyParams{
         public float mExposure = 0;
@@ -272,15 +272,16 @@ public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBa
 
     //设置绿幕
     private void setGreenScreen(int index) {
+        Context c =null;
         String file = "";
         switch (index) {
             case 1:
-                file = "green_1.mp4";
+                file = "assets://green_1.mp4";
                 break;
             default:
                 break;
         }
-        if (mBeautyChangeListener != null) {
+        if (mBeautyChangeListener != null) {   //设置绿幕文件
             BeautyParams params = new BeautyParams();
             params.mGreenFile = file;
             mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_GREEN);
@@ -288,7 +289,7 @@ public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBa
     }
 
     //设置动效
-    private void setDynamicEffect(int index) {
+    private void setDynamicEffect(int index) {    //设置动态贴图
         String path = "";
         switch (index) {
             case 1:
@@ -322,30 +323,30 @@ public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBa
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (seekBar.getId() == R.id.exposure_seekbar) {
-            if (mBeautyChangeListener != null) {
+            if (mBeautyChangeListener != null) {  //曝光
                 BeautyParams params = new BeautyParams();
                 params.mExposure = ((float)progress - 10.0f)/10.0f;
                 mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_EXPOSURE);
             }
-        } else if (seekBar.getId() == R.id.beauty_seekbar) {
+        } else if (seekBar.getId() == R.id.beauty_seekbar) {  //美颜
             if (mBeautyChangeListener != null) {
                 BeautyParams params = new BeautyParams();
                 params.mBeautyLevel = progress;
                 mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_BEAUTY);
             }
-        } else if (seekBar.getId() == R.id.whitening_seekbar) {
+        } else if (seekBar.getId() == R.id.whitening_seekbar) {  // 美白
             if (mBeautyChangeListener != null) {
                 BeautyParams params = new BeautyParams();
                 params.mWhiteLevel = progress;
-                mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_WHITE);
+                mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_WHITE); //,
             }
-        } else if (seekBar.getId() == R.id.bigeye_seekbar) {
+        } else if (seekBar.getId() == R.id.bigeye_seekbar) {  //大眼效果
             if (mBeautyChangeListener != null) {
                 BeautyParams params = new BeautyParams();
                 params.mBigEyeLevel = progress;
                 mBeautyChangeListener.onBeautyParamsChange(params, BEAUTYPARAM_BIG_EYE);
             }
-        } else if (seekBar.getId() == R.id.facelift_seekbar) {
+        } else if (seekBar.getId() == R.id.facelift_seekbar) { //瘦脸效果
             if (mBeautyChangeListener != null) {
                 BeautyParams params = new BeautyParams();
                 params.mFaceSlimLevel = progress;

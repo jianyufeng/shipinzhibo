@@ -2,6 +2,7 @@ package com.sanba.zhibb.play;
 
 import android.app.Activity;
 import android.app.Service;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import com.tencent.rtmp.TXLivePlayConfig;
 import com.tencent.rtmp.TXLivePlayer;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 
 /**
@@ -49,14 +52,13 @@ import java.text.SimpleDateFormat;
  * mLivePlayer.startPlay(flvUrl, type);
  * 9: 截流录制（仅直播）
  * 10 :视频截图
- *                          //截图
- //                    mLivePlayer.snapshot(new TXLivePlayer.ITXSnapshotListener() {
- //                        @Override
- //                        public void onSnapshot(Bitmap bitmap) {
- //                            Log.e("","ss");
- //                        }
- //                    });
- *
+ * //截图
+ * //                    mLivePlayer.snapshot(new TXLivePlayer.ITXSnapshotListener() {
+ * //                        @Override
+ * //                        public void onSnapshot(Bitmap bitmap) {
+ * //                            Log.e("","ss");
+ * //                        }
+ * //                    });
  */
 public class LivePlayerActivity extends Activity implements ITXLivePlayListener, OnClickListener {
     private static final String TAG = LivePlayerActivity.class.getSimpleName();//设置log标记
@@ -308,6 +310,25 @@ public class LivePlayerActivity extends Activity implements ITXLivePlayListener,
             }
         });
 
+        //截图
+        Button mBtnSnap = (Button) findViewById(R.id.btnSnap);
+        mBtnSnap.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mVideoPlay) {
+                    return;
+                }
+                //截图
+                mLivePlayer.snapshot(new TXLivePlayer.ITXSnapshotListener() {
+                    @Override
+                    public void onSnapshot(Bitmap bitmap) {
+                        //保存截图
+                        saveBitmap(bitmap);
+                    }
+                });
+            }
+        });
+
         mSeekBar = (SeekBar) findViewById(R.id.seekbar);
         //点播进度条
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -388,6 +409,33 @@ public class LivePlayerActivity extends Activity implements ITXLivePlayListener,
 
         View view = mPlayerView.getRootView();
         view.setOnClickListener(this);
+    }
+
+    /**
+     * 保存方法
+     */
+    public void saveBitmap(Bitmap bm) {
+        File f = new File("/sdcard/zhibo/");
+        if (!f.exists()) {
+            if (!f.mkdirs()) {
+                Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        File dir = new File(f, "save_" + System.currentTimeMillis() + ".jpg");
+        try {
+            if (!dir.exists()) {
+                //在指定的文件夹中创建文件
+                dir.createNewFile();
+            }
+            FileOutputStream out = new FileOutputStream(dir);
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            Toast.makeText(this, "已经保存", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //播放直播   分类播放类型  只是对rtmp直播进行了处理
@@ -773,11 +821,13 @@ public class LivePlayerActivity extends Activity implements ITXLivePlayListener,
                 break;
         }
     }
+
     boolean oo = true;
+
     //等待中 加载的动画
     private void startLoadingAnimation() {
         if (mLoadingView != null) {
-            if (!oo){
+            if (!oo) {
                 return;
             }
 

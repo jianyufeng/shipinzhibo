@@ -69,81 +69,102 @@
 
         </LinearLayout>
         <!--底部的功能按钮-->
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/test_releative_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_height="55dp"
             android:layout_gravity="bottom">
-            <TextView
-                android:layout_width="wrap_content"
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:background="#aaffffff"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnPlay"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/play_start"/>
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnPlay"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/play_start"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnLog"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/log_show"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnHWDecode"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/quick"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnOrientation"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/landscape"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnRenderMode"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/fill_mode"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnCacheStrategy"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/cache_time"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnStop"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@mipmap/close_press"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnLog"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/log_show"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnHWDecode"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/quick"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnOrientation"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/landscape"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnRenderMode"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/fill_mode"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnCacheStrategy"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/cache_time"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnSnap"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/close_press"
+                    android:text="截"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/close_press"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </RelativeLayout>
         <!--播放时的戒断状态-->
         <ScrollView
             android:id="@+id/scrollview"
@@ -298,65 +319,81 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/gray_radius_rectangle"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingRight="5dp">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:src="@drawable/circle"/>
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="45dp"
+                        android:layout_height="35dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                        <LinearLayout android:layout_width="match_parent"
-                                      android:layout_height="0dp"
-                                      android:layout_weight="1"
-                                      android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
                             <TextView
-                                android:maxWidth="50dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
+                                android:layout_marginLeft="5dp"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:maxWidth="50dp"
                                 android:singleLine="true"
                                 android:text="艾尼"
-                                android:ellipsize="end"
                                 android:textColor="#fff"
                                 android:textSize="12sp"/>
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent"
-                                      android:layout_height="0dp"
-                                      android:layout_weight="1"
-                                      android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
                             <TextView
-                                android:gravity="center_vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
+                                android:layout_marginLeft="5dp"
                                 android:background="@drawable/red_radius_rectangle"
+                                android:gravity="center_vertical"
+                                android:paddingBottom="1dp"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
+                                android:paddingTop="1dp"
                                 android:text="小小星光"
                                 android:textColor="#fff"
                                 android:textSize="10sp"/>
                             <TextView
-                                android:gravity="center_vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
+                                android:gravity="center_vertical"
                                 android:text="1555w万"
                                 android:textColor="#fff"
                                 android:textSize="12sp"/>
                         </LinearLayout>
                     </LinearLayout>
                     <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/white_radius_rectangle"
                         android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="5dp"
                         android:text="关注"
                         android:textColor="#f00"
-                        android:textSize="14sp"/>
-
+                        android:textSize="14sp"
+                        android:visibility="gone"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -371,50 +408,58 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
+                        <View android:layout_width="0dp"
+                              android:layout_height="1dp"
+                              android:layout_weight="1"/>
                         <HorizontalScrollView
-                            android:scrollbars="none"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="2dp"
                             android:layout_marginRight="5dp"
-                        >
+                            android:scrollbars="none">
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
+
+
                                 <ImageView
-                                    android:layout_marginLeft="10dp"
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
+                                    android:layout_marginLeft="10dp"
                                     android:background="@drawable/red_circle"/>
                                 <ImageView
-                                    android:layout_marginLeft="10dp"
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    android:background="@drawable/red_circle"/>
-                                <ImageView
                                     android:layout_marginLeft="10dp"
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:background="@drawable/red_circle"/>
-                                <ImageView
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
                                     android:background="@drawable/red_circle"/>
                             </LinearLayout>
                         </HorizontalScrollView>
 
                     </LinearLayout>
                 </LinearLayout>
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/gray_radius_rectangle"
-                    android:gravity="center"
-                    android:text="210"
-                    android:textColor="#fff"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="15dp"
+                        android:src="#ff0"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="210"
+                        android:textColor="#fff"
+                        android:textSize="14sp"/>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
